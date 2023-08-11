@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 // components
-import Todo from '../components/Todo';
+import Todo from "../components/Todo";
 
 // API
-import { getTodos, postTodo } from '../modules/API';
+import { getTodos, postTodo } from "../modules/API";
 
 const TodoList = () => {
-  const token = window.localStorage.getItem('token');
+  const token = window.localStorage.getItem("token");
 
   const navigate = useNavigate();
 
@@ -20,31 +20,31 @@ const TodoList = () => {
 
     token
       ? getTodos(token)
-          .then(res => setTodoList(res.data))
-          .catch(err => {
+          .then((res) => setTodoList(res.data))
+          .catch((err) => {
             alert(err.response.data.message);
-            navigate('/signin');
+            navigate("/signin");
           })
-      : navigate('/signin');
+      : navigate("/signin");
   }, [isSuccess, navigate, token]);
 
   const [todoList, setTodoList] = useState([]);
 
-  const [newTodo, setNewTodo] = useState('');
+  const [newTodo, setNewTodo] = useState("");
 
-  const todoHandler = event => {
+  const todoHandler = (event) => {
     setNewTodo(event.target.value);
   };
 
-  const submitHandler = event => {
+  const submitHandler = (event) => {
     event.preventDefault();
 
     postTodo({ todo: newTodo }, token)
       .then(() => {
         setIsSuccess(true);
-        setNewTodo('');
+        setNewTodo("");
       })
-      .catch(err => alert(err.response.data.message));
+      .catch((err) => alert(err.response.data.message));
   };
 
   return (
@@ -62,8 +62,10 @@ const TodoList = () => {
         </Button>
       </form>
 
+      <h5>완료 여부를 체크하려면 수정 버튼을 눌러주세요.</h5>
+
       <ul>
-        {todoList.map(el => {
+        {todoList.map((el) => {
           const { id, todo, isCompleted } = el;
           return (
             <Todo
