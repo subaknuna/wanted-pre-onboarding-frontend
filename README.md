@@ -15,7 +15,7 @@ $ npm start
 
 ## 배포링크
 
-https://cozy-stroopwafel-0caeb5.netlify.app/signin
+https://64d63648417d150008a2c4da--cozy-stroopwafel-0caeb5.netlify.app/signin
 
 <br>
 
